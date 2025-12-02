@@ -97,7 +97,6 @@ function createWizardManager() {
             }
             isDisabled = totalAulas === 0; 
         } else {
-            // CORREÇÃO: Passo 3 (Preferências) não tem validação bloqueante, libera o botão
             isDisabled = false;
         }
 
@@ -115,7 +114,6 @@ function createWizardManager() {
     function goToStep(stepNumber) {
         if (stepNumber > currentStep) {
             if (currentStep === 1) saveStep1Data();
-            // Passo 2 salva em tempo real
         }
 
         currentStep = stepNumber;
@@ -168,8 +166,6 @@ function createWizardManager() {
 
     return { goToStep, updateButtonState };
 }
-
-// ================= PASSO 1: ESCOPO =================
 
 function renderStep1() {
     const container = document.getElementById("gerador-step1-container");
@@ -369,7 +365,18 @@ function updateSelectAllState(checkId, gridId) {
 function saveStep1Data() {
 }
 
-// ================= PASSO 2: MATRIZ CURRICULAR =================
+function calculateStructureCapacity(estrutura) {
+    if (!estrutura || !estrutura.dias) return 0;
+    
+    let totalSlots = 0;
+    Object.values(estrutura.dias).forEach(dia => {
+        if (dia.blocos && Array.isArray(dia.blocos)) {
+            totalSlots += dia.blocos.filter(b => b.type === 'aula').length;
+        }
+    });
+    
+    return totalSlots;
+}
 
 function renderStep2() {
     const container = document.getElementById("gerador-step2-container");
@@ -384,20 +391,58 @@ function renderStep2() {
         return;
     }
 
-    let html = `<div style="display: flex; flex-direction: column; gap: 32px;">`;
+    const styles = `
+    <style>
+        .capacity-bar-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-grow: 1;
+            margin-right: 16px;
+        }
+        .capacity-bar-bg {
+            flex-grow: 1;
+            height: 12px;
+            background-color: #f1f5f9;
+            border-radius: 99px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+        }
+        .capacity-bar-fill {
+            height: 100%;
+            width: 0%;
+            background-color: var(--brand);
+            border-radius: 99px;
+            transition: width 0.3s ease, background-color 0.3s ease;
+        }
+        .capacity-bar-fill.status-ok { background-color: #22c55e; } 
+        .capacity-bar-fill.status-warn { background-color: #f97316; } 
+        .capacity-bar-fill.status-error { background-color: #ef4444; } 
+        
+        .capacity-text {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--muted);
+            white-space: nowrap;
+        }
+    </style>
+    `;
+
+    let html = `${styles}<div style="display: flex; flex-direction: column; gap: 32px;">`;
 
     turmasSelecionadas.forEach(turma => {
         const estrutura = estruturas.find(e => e.id === turma.estruturaId);
+        const capacidadeTotal = calculateStructureCapacity(estrutura);
         
         if (!horarioState.matrizCurricular[turma.id]) {
             horarioState.matrizCurricular[turma.id] = {};
         }
 
         html += `
-            <fieldset class="fieldset-wrapper fieldset-matriz" data-turma-id="${turma.id}" style="border: 2px solid var(--border);">
+            <fieldset class="fieldset-wrapper fieldset-matriz" data-turma-id="${turma.id}" data-capacity="${capacidadeTotal}" style="border: 2px solid var(--border);">
                 <legend style="font-size: 1.1rem; color: var(--fg);">
                     ${turma.nome} 
-                    <span class="muted" style="font-weight: normal; font-size: 0.9rem;">(Estrutura: ${estrutura ? estrutura.nome : 'N/D'})</span>
+                    <span class="muted" style="font-weight: normal; font-size: 0.9rem;">(${estrutura ? estrutura.nome : 'N/D'})</span>
                 </legend>
                 
                 <div class="matriz-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 16px;">
@@ -437,8 +482,17 @@ function renderStep2() {
                         `;
                     }).join('')}
                 </div>
-                <div class="total-aulas-counter" style="margin-top: 16px; text-align: right; font-weight: bold; color: var(--muted); border-top: 1px solid var(--border); padding-top: 8px;">
-                    Total: <span class="contador">0</span> aulas
+                
+                <div style="margin-top: 16px; padding-top: 12px; border-top: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between;">
+                    <div class="capacity-bar-wrapper">
+                        <span class="capacity-text">Progresso:</span>
+                        <div class="capacity-bar-bg">
+                            <div class="capacity-bar-fill"></div>
+                        </div>
+                    </div>
+                    <div class="total-aulas-counter" style="font-weight: bold; color: var(--muted); white-space: nowrap;">
+                        <span class="contador">0</span> / ${capacidadeTotal} aulas
+                    </div>
                 </div>
             </fieldset>
         `;
@@ -449,8 +503,11 @@ function renderStep2() {
 
     container.querySelectorAll('.fieldset-matriz').forEach(fieldset => {
         const turmaId = fieldset.dataset.turmaId;
+        const maxCapacity = parseInt(fieldset.dataset.capacity) || 0;
+        
         const cards = fieldset.querySelectorAll('.materia-card-control');
         const counterSpan = fieldset.querySelector('.contador');
+        const barFill = fieldset.querySelector('.capacity-bar-fill');
 
         const updateStateAndTotal = () => {
             let total = 0;
@@ -479,7 +536,35 @@ function renderStep2() {
                 }
             });
             
+            // Atualiza Texto
             counterSpan.textContent = total;
+            if (total > maxCapacity) {
+                counterSpan.style.color = 'var(--danger)';
+            } else if (total === maxCapacity) {
+                counterSpan.style.color = '#15803d'; // Verde escuro
+            } else {
+                counterSpan.style.color = 'var(--muted)';
+            }
+
+            // Atualiza Barra de Progresso
+            let percent = 0;
+            if (maxCapacity > 0) {
+                percent = Math.min((total / maxCapacity) * 100, 100);
+            }
+            
+            barFill.style.width = `${percent}%`;
+            
+            // Lógica de Cores da Barra
+            barFill.classList.remove('status-ok', 'status-warn', 'status-error');
+            
+            if (total > maxCapacity) {
+                barFill.classList.add('status-error');
+            } else if (total === maxCapacity) {
+                barFill.classList.add('status-ok');
+            } else {
+                // Azul padrão (definido no CSS inline)
+            }
+
             wizardManager.updateButtonState();
         };
 
@@ -516,8 +601,6 @@ function renderStep2() {
 
 function saveStep2Data() {
 }
-
-// ================= PASSO 3: PREFERÊNCIAS E CONFIRMAÇÃO =================
 
 function renderStep3() {
     const container = document.getElementById("gerador-step3-container");

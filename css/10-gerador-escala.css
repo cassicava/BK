@@ -11,7 +11,6 @@
     flex-grow: 1;
 }
 
-/* --- Wizard Tabs --- */
 #gerador-wizard-tabs {
     background-color: var(--bg); 
     border: none;
@@ -63,7 +62,6 @@
     content: '🔒';
 }
 
-/* --- Passo 1: Escopo (Listas de Seleção) --- */
 #gerador-step1-container .check-container {
     background-color: var(--bg);
     border: 1px solid var(--border);
@@ -71,7 +69,6 @@
     padding: 12px;
 }
 
-/* --- Passo 2: Matriz Curricular (GRID) --- */
 .matriz-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
@@ -118,13 +115,11 @@
     font-size: 0.9rem;
 }
 
-/* --- Passo 3: Resumo --- */
 #gerador-step3-container .list li {
     background-color: var(--card);
     border: 1px solid var(--border);
 }
 
-/* --- Visualização da Grade (Tabela) --- */
 #gerador-escalaView.hidden,
 #escalaSalvaView.hidden {
   display: none !important;
@@ -137,6 +132,7 @@
   gap: 16px;
   flex-grow: 1;
   min-height: 0;
+  padding-bottom: 140px;
 }
 
 .escala-final-table {
@@ -151,7 +147,7 @@
   padding: 8px;
   text-align: center;
   min-width: 100px;
-  height: 50px; /* Altura mínima para as células */
+  height: 50px; 
   vertical-align: middle;
 }
 
@@ -163,7 +159,6 @@
   z-index: 3;
 }
 
-/* Coluna de Horários (Primeira) */
 .escala-final-table th:first-child,
 .escala-final-table td:first-child {
   position: sticky;
@@ -192,10 +187,9 @@
 }
 
 .escala-final-table td.empty-slot:hover {
-    background-color: #e0f2fe !important; /* Azul claro no hover de vazio */
+    background-color: #e0f2fe !important; 
 }
 
-/* Badge do Título da Grade (Edição) */
 .escala-title-container {
   position: relative;
   display: flex;
@@ -252,7 +246,6 @@
   display: block;
 }
 
-/* Responsividade */
 @media (max-width: 768px) {
     .matriz-grid {
         grid-template-columns: 1fr 1fr;

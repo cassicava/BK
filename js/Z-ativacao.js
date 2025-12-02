@@ -2,7 +2,8 @@
  * 🔑 Sistema de Ativação e Licenciamento
  **************************************/
 
-const SEGREDO_ATIVACAO = "PACOCA_POMPOM_PRETA_KEY_2025";
+// AQUI ESTAVA O PROBLEMA: Agora está atualizado para a frase correta do Aula Pro
+const SEGREDO_ATIVACAO = "SEMPRE_VOU_TE_AMAR_JANAINA_KEY_2025";
 
 const activationState = {
     isActivated: false,

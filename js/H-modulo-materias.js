@@ -23,7 +23,7 @@ const CATALOGO_MATERIAS = [
     { id: 'fis', label: '⚛️ Física', nome: 'Física', sigla: 'FISIC', cor: '#5eead4', emoji: '⚛️' },
     { id: 'quim', label: '🧪 Química', nome: 'Química', sigla: 'QUIMI', cor: '#14b8a6', emoji: '🧪' },
     { id: 'ing', label: '🌐 Inglês', nome: 'Inglês', sigla: 'INGLE', cor: '#a5b4fc', emoji: '🌐' },
-    { id: 'esp', label: '🌐 Espanhol', nome: 'Espanhol', sigla: 'ESPAN', cor: '#fdba74', emoji: '🇪🇸' },
+    { id: 'esp', label: '🇪🇸 Espanhol', nome: 'Espanhol', sigla: 'ESPAN', cor: '#fdba74', emoji: '🇪🇸' },
     { id: 'art', label: '🎨 Artes', nome: 'Artes', sigla: 'ARTES', cor: '#f0abfc', emoji: '🎨' },
     { id: 'edfis', label: '🏀 Ed. Física', nome: 'Ed. Física', sigla: 'EDFIS', cor: '#bef264', emoji: '🏀' },
     { id: 'filo', label: '🤔 Filosofia', nome: 'Filosofia', sigla: 'FILOS', cor: '#c084fc', emoji: '🤔' },
@@ -50,7 +50,8 @@ const CATALOGO_MATERIAS = [
     { id: 'jor', label: '📰 Jornalismo', nome: 'Jornalismo', sigla: 'JORNA', cor: '#6366f1', emoji: '📰' },
     { id: 'des', label: '✒️ Design', nome: 'Design', sigla: 'DESIG', cor: '#f472b6', emoji: '✒️' },
     { id: 'ti', label: '💾 T.I. / Computação', nome: 'Computação', sigla: 'COMPU', cor: '#0f172a', emoji: '💾' },
-    { id: 'gast', label: '🍳 Gastronomia', nome: 'Gastronomia', sigla: 'GASTR', cor: '#f59e0b', emoji: '🍳' }
+    { id: 'gast', label: '🍳 Gastronomia', nome: 'Gastronomia', sigla: 'GASTR', cor: '#f59e0b', emoji: '🍳' },
+    { id: 'rel', label: '✝️ Ensino Religioso', nome: 'Ens. Religioso', sigla: 'RELIG', cor: '#a78bfa', emoji: '✝️' }
 ];
 
 const PALETA_CORES = [
@@ -61,15 +62,26 @@ const PALETA_CORES = [
     '#64748b', '#0f172a', '#b91c1c', '#15803d', '#b45309', '#4338ca'
 ];
 
-const EMOJI_LIST = [
-    '📚', '✍️', '📐', '🔬', '🏺', '🗺️', '🌐', '🎨', '🏀', '💻', 
-    '⚛️', '🧪', '🐝', '🤔', '💭', '🎵', '🎭', '✝️', '💰', '🤖', 
-    '📝', '📖', '🚀', '⚖️', '🩺', '🏥', '🧠', '⚙️', '🏛️', '💼', 
-    '💹', '📉', '📢', '🧸', '🐾', '🌱', '🍎', '💊', '🦷', '📰', 
-    '✒️', '💾', '🍳', '🧬', '🔭', '📡', '🔌', '🧱', '🎬', '📸', 
-    '🎤', '🎹', '🎻', '⚽', '🏐', '🏊', '🥋', '🧘', '🗣️', '🔢', 
-    '🦠', '⚒️', '✈️'
-];
+const EMOJI_CATEGORIES = {
+    "Geral & Escola": [
+        '📚', '🎓', '🎒', '🏫', '✏️', '🖍️', '📝', '📖', '📒', '✂️', '📎', '📏', '🗑️', '🔔', '👩‍🏫', '👨‍🏫', '🚌', '🗓️', '🖇️', '🖊️'
+    ],
+    "Linguagens & Humanas": [
+        '✍️', '🏺', '🗺️', '🌐', '💬', '🗣️', '🤔', '💭', '📜', '⚖️', '🏛️', '📰', '✝️', '🕌', '🕍', '⛩️', '🗿', '🌍', '🏳️‍🌈', '🇧🇷', '🇺🇸', '🇪🇸', '🇫🇷'
+    ],
+    "Exatas & Tecnologia": [
+        '📐', '🧮', '💻', '🔢', '💹', '📉', '📊', '💾', '📡', '🔭', '🧱', '⚙️', '🔌', '🔋', '📱', '⌨️', '🖱️', '🕹️', '🔨', '🏗️', '✈️', '🚀'
+    ],
+    "Ciências & Saúde": [
+        '🔬', '🧪', '🧬', '⚛️', '🦠', '🩺', '💊', '💉', '🧠', '🫀', '🦷', '🦴', '🌱', '🌿', '🍎', '🥕', '🐾', '🐝', '🦕', '🌋', '🌊', '☀️', '🌡️'
+    ],
+    "Artes & Esportes": [
+        '🎨', '🎭', '🎬', '📸', '🎵', '🎹', '🎸', '🎻', '🎤', '🎧', '💃', '🏀', '⚽', '🏐', '🎾', '🎱', '🏓', '🏊', '🥋', '🧘', '🤸', '🏆', '🥇'
+    ],
+    "Profissional & Diversos": [
+        '💼', '💰', '📢', '🧸', '🍳', '🧵', '👗', '💇', '🚒', '👮', '📦', '🛒', '💡', '🔦', '🔑', '🎁', '⭐', '❤️'
+    ]
+};
 
 function setMateriaFormDirty(isDirty) {
     dirtyForms.materias = isDirty;
@@ -109,16 +121,8 @@ function renderFormularioMateria() {
 
         <fieldset class="fieldset-wrapper">
             <legend>🤩 Ícone (Emoji)</legend>
-            <div id="materiaEmojiContainer" class="emoji-palette"></div>
+            <div id="materiaEmojiContainer" class="emoji-palette-container" style="max-height: 300px; overflow-y: auto; padding-right: 8px;"></div>
         </fieldset>
-
-        <div class="materia-preview-section">
-            <h4 style="margin: 0 0 12px 0; color: var(--muted); font-size: 0.9rem; text-align: center;">Visualização na Grade</h4>
-            <div id="materiaPreviewCard" class="materia-preview-card">
-                <span class="preview-emoji">📚</span>
-                <span class="preview-sigla">SIGLA</span>
-            </div>
-        </div>
 
         <div class="form-row form-row-center" style="margin-top: 32px;">
             <button id="btnSalvarMateria" class="success">💾 Salvar Matéria</button>
@@ -134,7 +138,6 @@ function renderFormularioMateria() {
     document.getElementById("materiaNome").addEventListener("input", (e) => {
         tempMateriaData.nome = e.target.value;
         validateInput(e.target);
-        updatePreview();
         setMateriaFormDirty(true);
     });
 
@@ -142,7 +145,6 @@ function renderFormularioMateria() {
         e.target.value = e.target.value.toUpperCase();
         tempMateriaData.sigla = e.target.value;
         validateInput(e.target);
-        updatePreview();
         setMateriaFormDirty(true);
     });
 
@@ -152,8 +154,6 @@ function renderFormularioMateria() {
         cancelEditMateria();
         switchMateriasTab('gerenciar');
     });
-
-    updatePreview();
 }
 
 function handleCatalogoChange(e) {
@@ -181,7 +181,6 @@ function handleCatalogoChange(e) {
         
         validateInput(document.getElementById("materiaNome"));
         validateInput(document.getElementById("materiaSigla"));
-        updatePreview();
         setMateriaFormDirty(true);
     }
 }
@@ -217,13 +216,33 @@ function renderEmojiPalette() {
     if (!container) return;
 
     container.innerHTML = '';
-    EMOJI_LIST.forEach(emoji => {
-        const btn = document.createElement('button');
-        btn.className = 'emoji-btn';
-        btn.textContent = emoji;
-        btn.onclick = () => { selectEmoji(emoji); setMateriaFormDirty(true); };
-        container.appendChild(btn);
-    });
+
+    for (const [category, emojis] of Object.entries(EMOJI_CATEGORIES)) {
+        // Título da Categoria
+        const title = document.createElement('h5');
+        title.textContent = category;
+        title.style.margin = '12px 0 8px 0';
+        title.style.color = 'var(--muted)';
+        title.style.fontSize = '0.85rem';
+        title.style.borderBottom = '1px solid var(--border)';
+        title.style.paddingBottom = '4px';
+        container.appendChild(title);
+
+        // Grid de Emojis
+        const grid = document.createElement('div');
+        grid.className = 'emoji-palette';
+        grid.style.marginBottom = '8px';
+
+        emojis.forEach(emoji => {
+            const btn = document.createElement('button');
+            btn.className = 'emoji-btn';
+            btn.textContent = emoji;
+            btn.onclick = () => { selectEmoji(emoji); setMateriaFormDirty(true); };
+            grid.appendChild(btn);
+        });
+
+        container.appendChild(grid);
+    }
     
     parseEmojisInElement(container);
 }
@@ -247,7 +266,6 @@ function selectCor(cor) {
         if (swatch) swatch.classList.add('selected');
         if (pickerTrigger) pickerTrigger.style.backgroundColor = '';
     }
-    updatePreview();
 }
 
 function selectEmoji(emoji) {
@@ -256,27 +274,6 @@ function selectEmoji(emoji) {
     btns.forEach(b => {
         b.classList.toggle('selected', b.textContent === emoji || (b.querySelector('img') && b.querySelector('img').alt === emoji));
     });
-    updatePreview();
-}
-
-function updatePreview() {
-    const card = document.getElementById("materiaPreviewCard");
-    if (!card) return;
-
-    const { cor, sigla, emoji } = tempMateriaData;
-    const textColor = getContrastingTextColor(cor);
-
-    card.style.backgroundColor = cor;
-    card.style.color = textColor;
-    
-    const emojiSpan = card.querySelector('.preview-emoji');
-    const siglaSpan = card.querySelector('.preview-sigla');
-    
-    if(emojiSpan) {
-        emojiSpan.textContent = emoji;
-        parseEmojisInElement(emojiSpan);
-    }
-    if(siglaSpan) siglaSpan.textContent = sigla || 'SIGLA';
 }
 
 function getLeastUsedColor() {
