@@ -1,0 +1,362 @@
+/**************************************************************
+ * 🎨 Estilos do Editor Manual (Aula Pro)
+ **************************************************************/
+
+/* --- Container Principal da Barra (Estado Maximizado) --- */
+#editor-toolbox {
+    position: fixed;
+    bottom: 16px;
+    left: calc(var(--sidebar-width-collapsed) + 16px);
+    right: 16px;
+    height: 88px;
+    z-index: 100;
+    border-radius: 18px;
+    display: flex;
+    align-items: center;
+    padding: 8px;
+    gap: 8px;
+
+    /* Efeito de Vidro */
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+
+    /* ANIMAÇÕES */
+    transition: all 0.4s ease-in-out;
+    transform-origin: right center;
+    transform: scale(1) translateX(0); 
+    opacity: 1;
+}
+
+/* --- Estados da Barra --- */
+#editor-toolbox.is-docked-top {
+    top: calc(var(--header-height) + 16px);
+    bottom: auto;
+}
+
+#editor-toolbox.is-minimized {
+    transform: translateX(110%);
+    opacity: 0;
+    pointer-events: none;
+}
+
+#editor-toolbox.override-active {
+    box-shadow: 0 0 16px 4px rgba(239, 68, 68, 0.5);
+    border-color: rgba(239, 68, 68, 0.6);
+}
+
+/* --- Botão Flutuante (Estado Minimizado) --- */
+#editor-toolbox-fab {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    width: 64px;
+    height: 64px;
+    z-index: 99;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    line-height: 1;
+    cursor: pointer;
+
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+    color: var(--fg);
+    
+    transition: transform 0.3s ease, opacity 0.3s, top 0.4s ease-in-out, bottom 0.4s ease-in-out;
+    transform: scale(0);
+    opacity: 0;
+}
+
+#editor-toolbox-fab.is-docked-top {
+    top: calc(var(--header-height) + 24px);
+    bottom: auto;
+}
+
+#editor-toolbox-fab:not(.hidden) {
+    transform: scale(1);
+    opacity: 1;
+}
+
+#editor-toolbox-fab:hover {
+    transform: scale(1.05);
+}
+
+/* --- Estrutura Interna da Barra --- */
+.toolbox-layout-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+    height: 100%;
+}
+
+.toolbox-group-left, .toolbox-right-subgroup {
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    align-content: center;
+    justify-items: center;
+    height: 100%;
+    padding: 4px;
+    gap: 4px;
+    background-color: rgba(0, 0, 0, 0.05);
+    border-radius: 12px;
+}
+
+.toolbox-group-right {
+    display: flex;
+    gap: 8px;
+    height: 100%;
+    flex-shrink: 0;
+}
+
+.toolbox-content-wrapper {
+    flex-grow: 1;
+    height: 100%;
+    display: flex;
+    overflow: hidden;
+    align-items: center;
+    justify-content: center;
+}
+
+#toolbox-dynamic-content {
+    width: 100%;
+    height: 100%;
+}
+
+/* --- Botões da Toolbox --- */
+.toolbox-mode-btn,
+.toolbox-tool-btn,
+.toolbox-window-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    border-radius: 8px;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    transition: all 0.2s ease-out;
+    color: var(--muted);
+    position: relative;
+}
+
+.toolbox-mode-btn:hover,
+.toolbox-tool-btn:hover,
+.toolbox-window-btn:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+    color: var(--fg);
+}
+
+.toolbox-mode-btn.active,
+.toolbox-tool-btn.active {
+    background-color: var(--card);
+    color: var(--brand);
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+}
+
+.toolbox-btn-icon { font-size: 1.2rem; line-height: 1; }
+.toolbox-btn-text { font-size: 0.75rem; font-weight: 600; white-space: nowrap; }
+
+.toolbox-mode-btn { padding: 0 12px; gap: 6px; flex-direction: row; }
+.toolbox-tool-btn, .toolbox-window-btn { width: 38px; height: 32px; }
+
+.conflict-count-badge {
+    position: absolute;
+    top: 2px;
+    right: 2px;
+    background-color: var(--danger);
+    color: white;
+    font-size: 0.65rem;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+}
+
+/* --- Mensagens de Info --- */
+.toolbox-info-text {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    color: var(--muted);
+    font-weight: 500;
+    padding: 0 16px;
+    text-align: center;
+}
+
+/* --- Estilos da Tabela de Grade --- */
+.escala-final-table .editable-cell {
+    position: relative;
+    cursor: pointer;
+    transition: background-color 0.2s, box-shadow 0.2s;
+}
+
+.escala-final-table .celula-horario {
+    background-color: #f1f5f9;
+    color: var(--muted);
+    border-right: 2px solid var(--border);
+    user-select: none;
+}
+
+/* Estilo para slot vazio (janela/vago) */
+.escala-final-table .empty-slot {
+    background-image: repeating-linear-gradient(45deg, transparent, transparent 5px, rgba(0,0,0,0.02) 5px, rgba(0,0,0,0.02) 10px);
+}
+
+.escala-final-table .empty-slot:hover {
+    background-color: #e0f2fe !important;
+    box-shadow: inset 0 0 0 2px var(--brand);
+}
+
+/* Efeito de foco ao navegar com teclado */
+.cell-focused {
+    outline: 3px solid var(--brand);
+    outline-offset: -3px;
+    z-index: 10;
+}
+
+/* --- Visualização de Conflitos --- */
+.conflict-marker {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 0 12px 12px 0;
+    border-color: transparent var(--danger) transparent transparent;
+}
+
+.conflict-marker-tooltip {
+    visibility: hidden;
+    width: 200px;
+    background-color: var(--danger);
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 8px;
+    position: absolute;
+    z-index: 20;
+    bottom: 110%;
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 0;
+    transition: opacity 0.3s;
+    font-size: 0.8rem;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    pointer-events: none;
+}
+
+.conflict-marker-tooltip::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: var(--danger) transparent transparent transparent;
+}
+
+.editable-cell:hover .conflict-marker-tooltip,
+.cell-focused .conflict-marker-tooltip {
+    visibility: visible;
+    opacity: 1;
+}
+
+.has-conflict {
+    border: 2px solid var(--danger) !important;
+}
+
+/* --- Painel de Conflitos na Toolbox --- */
+.conflicts-view-container {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    overflow-y: auto;
+    height: 100%;
+    padding: 0 8px;
+    font-size: 0.85rem;
+    width: 100%;
+}
+
+.conflict-list-item {
+    padding: 6px 10px;
+    border-radius: 8px;
+    background-color: #fff;
+    border: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.conflict-list-item:hover {
+    border-color: var(--danger);
+    background-color: #fef2f2;
+}
+
+/* --- Painel de Ações na Toolbox --- */
+.actions-panel {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    gap: 16px;
+    height: 100%;
+    width: 100%;
+}
+
+.action-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background-color: rgba(255,255,255,0.5);
+    padding: 6px 12px;
+    border-radius: 12px;
+    border: 1px solid rgba(0,0,0,0.05);
+}
+
+.action-row .form-label {
+    font-size: 0.85rem;
+    margin: 0;
+    white-space: nowrap;
+}
+
+.action-row .explanation {
+    display: none; /* Esconde explicação detalhada na barra compacta */
+}
+
+/* Responsividade da Toolbox */
+@media (max-width: 768px) {
+    .toolbox-group-left, .toolbox-right-subgroup {
+        display: flex;
+        flex-direction: column;
+    }
+    .toolbox-mode-btn {
+        padding: 4px;
+        flex-direction: column;
+        gap: 2px;
+    }
+    .actions-panel {
+        flex-direction: column;
+        gap: 4px;
+        align-items: stretch;
+    }
+    .action-row {
+        justify-content: space-between;
+    }
+}

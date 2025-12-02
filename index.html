@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Aula Pro</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📚</text></svg>">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="css/01-base.css" />
+    <link rel="stylesheet" href="css/02-layout.css" />
+    <link rel="stylesheet" href="css/03-botoes.css" />
+    <link rel="stylesheet" href="css/04-formularios-e-seletores.css" />
+    <link rel="stylesheet" href="css/05-cards-e-paineis.css" />
+    <link rel="stylesheet" href="css/06-modais-e-notificacoes.css" />
+    <link rel="stylesheet" href="css/07-componentes-gerais.css" />
+    <link rel="stylesheet" href="css/08-logo.css" />
+    <link rel="stylesheet" href="css/09-responsivo.css" />
+    <link rel="stylesheet" href="css/10-gerador-escala.css" />
+    <link rel="stylesheet" href="css/11-boas-vindas.css" />
+    <link rel="stylesheet" href="css/12-editor-manual.css" />
+    <link rel="stylesheet" href="css/13-animacoes.css" />
+    <link rel="stylesheet" href="css/14-efeitos-especiais.css" />
+    <link rel="stylesheet" href="css/15-campos-animados.css" />
+    <link rel="stylesheet" href="css/17-notificacoes.css" />
+    <link rel="stylesheet" href="css/18-validacao.css" />
+    <link rel="stylesheet" href="css/19-painel-abas.css" />
+    <link rel="stylesheet" href="css/20-configuracoes.css" />
+    <link rel="stylesheet" href="css/21-animacoes-notificacoes.css" />
+    <link rel="stylesheet" href="css/22-painel-ajuda.css" />
+    <link rel="stylesheet" href="css/23-foco-individual.css" />
+    <link rel="stylesheet" href="css/24-splash-screen.css" />
+    <link rel="stylesheet" href="css/25-tela-ativacao.css" />
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twemoji/14.0.2/twemoji.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+</head>
+
+<body>
+    <div id="activation-screen">
+        <div class="activation-card">
+            <span class="cat-lock-icon">🔒</span>
+            <h1 class="activation-title">Ativação do Produto</h1>
+            <p class="activation-subtitle">Insira a chave de licença enviada para o seu e-mail.</p>
+            
+            <div class="license-digits-container">
+                <div class="digit-group">
+                    <input type="text" class="digit-input" maxlength="1" autocomplete="off">
+                    <input type="text" class="digit-input" maxlength="1" autocomplete="off">
+                    <input type="text" class="digit-input" maxlength="1" autocomplete="off">
+                    <input type="text" class="digit-input" maxlength="1" autocomplete="off">
+                </div>
+                <span class="digit-separator">-</span>
+                <div class="digit-group">
+                    <input type="text" class="digit-input" maxlength="1" autocomplete="off">
+                    <input type="text" class="digit-input" maxlength="1" autocomplete="off">
+                    <input type="text" class="digit-input" maxlength="1" autocomplete="off">
+                    <input type="text" class="digit-input" maxlength="1" autocomplete="off">
+                </div>
+                <span class="digit-separator">-</span>
+                <div class="digit-group">
+                    <input type="text" class="digit-input" maxlength="1" autocomplete="off">
+                    <input type="text" class="digit-input" maxlength="1" autocomplete="off">
+                    <input type="text" class="digit-input" maxlength="1" autocomplete="off">
+                    <input type="text" class="digit-input" maxlength="1" autocomplete="off">
+                </div>
+                <span class="digit-separator">-</span>
+                <div class="digit-group">
+                    <input type="text" class="digit-input" maxlength="1" autocomplete="off">
+                    <input type="text" class="digit-input" maxlength="1" autocomplete="off">
+                    <input type="text" class="digit-input" maxlength="1" autocomplete="off">
+                    <input type="text" class="digit-input" maxlength="1" autocomplete="off">
+                </div>
+            </div>
+            
+            <button id="btn-ativar-sistema" disabled>Ativar</button>
+            <div id="activation-status-text"></div>
+        </div>
+    </div>
+
+    <div id="splash-screen">
+        <div class="splash-logo-container">
+            <span class="logo-compact">AP</span>
+        </div>
+        <div class="splash-grid">
+            <div class="grid-line h-line h-line-1"></div>
+            <div class="grid-line h-line h-line-2"></div>
+            <div class="grid-line h-line h-line-3"></div>
+            <div class="grid-line v-line v-line-1"></div>
+            <div class="grid-line v-line v-line-2"></div>
+            <div class="grid-line v-line v-line-3"></div>
+        </div>
+        <div class="splash-text-container">
+            <h2 id="splash-title">Bem-vindo(a) de volta,</h2>
+            <h1 id="splash-user-name" class="animated-brand-text"></h1>
+            <p id="splash-subtitle">Organizando suas aulas...</p>
+        </div>
+    </div>
+
+
+    <div id="welcome-overlay">
+        <div class="welcome-card">
+
+            <div id="welcome-step-1" class="welcome-step">
+                <h2 class="welcome-title">Boas-vindas ao <span class="animated-brand-text"
+                        style="font-size: inherit;">Aula Pro</span>!</h2>
+                <p class="welcome-subtitle">Sua nova ferramenta para criar grades horárias escolares de forma inteligente e sem conflitos.</p>
+                <div class="welcome-options-container">
+                    <div class="welcome-option-card" id="welcome-start-fresh">
+                        <div class="welcome-option-icon">🚀</div>
+                        <h3>Começar do Zero</h3>
+                        <p>Configure suas estruturas de horário, cadastre matérias, professores e turmas para gerar sua primeira grade.</p>
+                    </div>
+                    <div class="welcome-option-card" id="welcome-import-backup">
+                        <div class="welcome-option-icon">📥</div>
+                        <h3>Importar Backup</h3>
+                        <p>Já usa o Aula Pro? Pule a configuração e recupere todos os seus dados a partir de um arquivo de backup.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div id="welcome-step-2" class="welcome-step">
+                <h2 class="welcome-title">Vamos personalizar sua experiência</h2>
+                <div class="welcome-form-group">
+                    <label for="welcome-nome-input" class="welcome-label">Primeiro, como podemos te chamar?</label>
+                    <input type="text" id="welcome-nome-input" class="welcome-input"
+                        placeholder="Seu nome" autocomplete="off">
+                </div>
+                <button id="welcome-personalizacao-next" class="welcome-btn welcome-btn-primary">Próximo</button>
+                <button class="welcome-btn-secondary welcome-btn-back" data-to-step="1">
+                    &lt; Voltar</button>
+            </div>
+
+            <div id="welcome-step-3" class="welcome-step">
+                <h2 class="welcome-title">Como vamos simplificar a sua gestão escolar:</h2>
+                
+                <div id="welcome-feature-carousel">
+                    <div class="carousel-item active">
+                        <span>🚀</span>
+                        <h3>Gere horários completos em segundos.</h3>
+                    </div>
+                    <div class="carousel-item">
+                        <span>✅</span>
+                        <h3>Evite choques de professores e janelas indesejadas.</h3>
+                    </div>
+                    <div class="carousel-item">
+                        <span>🎨</span>
+                        <h3>Edite a grade visualmente com assistente inteligente.</h3>
+                    </div>
+                    <div class="carousel-item">
+                        <span>📂</span>
+                        <h3>Centralize professores, turmas e matrizes.</h3>
+                    </div>
+                </div>
+                <button id="welcome-proposta-next" class="welcome-btn welcome-btn-primary">Próximo</button>
+                <button class="welcome-btn-secondary welcome-btn-back" data-to-step="2">
+                    &lt; Voltar</button>
+            </div>
+
+            <div id="welcome-step-4" class="welcome-step">
+                <h2 class="welcome-title">Quase pronto!</h2>
+                <p class="welcome-subtitle">Para continuar, por favor, leia e aceite nossos termos de uso e política de privacidade.</p>
+                <div class="welcome-terms-container">
+                    <div class="info-card" id="welcome-terms-card">
+                        <span class="icon"></span>
+                        <span class="text">Termos de Uso</span>
+                    </div>
+                    <div class="info-card" id="welcome-privacy-card">
+                        <span class="icon"></span>
+                        <span class="text">Política de Privacidade</span>
+                    </div>
+                </div>
+                <button id="welcome-finish-btn" class="success" disabled>Concluir e Começar a
+                    Usar!</button>
+                <button class="welcome-btn-secondary welcome-btn-back" data-to-step="3">
+                    &lt; Voltar</button>
+            </div>
+
+            <div class="welcome-progress-indicator">
+                <span class="progress-dot" data-step="1"></span>
+                <span class="progress-dot" data-step="2"></span>
+                <span class="progress-dot" data-step="3"></span>
+                <span class="progress-dot" data-step="4"></span>
+            </div>
+
+        </div>
+    </div>
+    <nav id="sidebar">
+        <a href="#" class="app-brand" onclick="go('home')">
+            <span class="logo-compact">AP</span>
+            <span class="logo-full animated-brand-text">Aula Pro</span>
+        </a>
+
+        <div class="sidebar-links">
+            <button class="tab-btn active" data-page="home">
+                <span class="tab-icon">🏠</span>
+                <span class="tab-text">Início</span>
+            </button>
+            <button class="tab-btn" data-page="estruturas">
+                <span class="tab-icon">🏗️</span>
+                <span class="tab-text">Estruturas</span>
+            </button>
+            <button class="tab-btn" data-page="materias">
+                <span class="tab-icon">📚</span> <span class="tab-text">Matérias</span>
+            </button>
+            <button class="tab-btn" data-page="professores">
+                <span class="tab-icon">👨‍🏫</span> <span class="tab-text">Professores</span>
+            </button>
+            <button class="tab-btn" data-page="turmas">
+                <span class="tab-icon">🎓</span> <span class="tab-text">Turmas</span>
+            </button>
+            <button class="tab-btn" data-page="gerar-horario">
+                <span class="tab-icon">✨</span>
+                <span class="tab-text">Gerar Horário</span>
+            </button>
+            <button class="tab-btn" data-page="horarios-salvos">
+                <span class="tab-icon">🗂️</span>
+                <span class="tab-text">Horários Salvos</span>
+            </button>
+        </div>
+
+        <button class="tab-btn" data-page="configuracoes" title="Configurações">
+            <span class="tab-icon">⚙️</span>
+            <span class="tab-text">Configurações</span>
+        </button>
+    </nav>
+
+    <main class="container">
+        <header id="main-header">
+            <h1 id="page-title"></h1>
+            <div class="header-right-group">
+                <button id="context-help-btn" style="display: none;">💡 Ajuda</button>
+                <div class="header-user-info">
+                </div>
+            </div>
+        </header>
+<br/><br/>
+        <section id="page-home" class="page">
+            <div class="quick-metrics-panel card">
+                <div class="metrics-items">
+                    <span id="metric-estruturas" class="metric-item">🏗️ Estruturas: 0</span>
+                    <span class="metric-separator">|</span>
+                    <span id="metric-materias" class="metric-item">📚 Matérias: 0</span>
+                    <span class="metric-separator">|</span>
+                    <span id="metric-professores" class="metric-item">👨‍🏫 Professores: 0</span>
+                     <span class="metric-separator">|</span>
+                    <span id="metric-turmas" class="metric-item">🎓 Turmas: 0</span>
+                </div>
+            </div>
+
+            <div class="home-progress-panel" id="home-progress-section">
+                <div class="home-progress-header">
+                    <span>Progresso da Configuração</span>
+                    <span id="home-progress-step-text">Nível 1: Início</span>
+                </div>
+                <div class="home-progress-bar-container">
+                    <div id="home-progress-bar" class="home-progress-bar-fill"></div>
+                    <span id="home-progress-percent" class="home-progress-text">0%</span>
+                </div>
+            </div>
+
+            <div class="home-layout-grid">
+                <div class="home-column-main">
+                    <h3 class="home-column-title">Crie e Gerencie seus Horários</h3>
+                    <div class="home-card-wrapper">
+                         <a class="card home-card" data-goto="gerar-horario">
+                            <h3>✨ Gerar Novo Horário</h3>
+                            <p class="home-card-description">Crie grades horárias escolares de forma inteligente com o assistente passo a passo.</p>
+                         </a>
+                    </div>
+                     <div class="home-card-wrapper">
+                         <a class="card home-card" data-goto="horarios-salvos">
+                            <h3>🗂️ Horários Salvos</h3>
+                             <p class="home-card-description">Acesse, visualize, edite e exporte as grades que você já criou e salvou.</p>
+                         </a>
+                    </div>
+                </div>
+                <div class="home-column-side">
+                    <h3 class="home-column-title">Cadastros Essenciais</h3>
+                     <div class="home-side-grid">
+                        <div class="home-card-wrapper">
+                             <a class="card home-card" data-goto="estruturas">
+                                <h3>🏗️ Estruturas</h3>
+                                <p class="home-card-description-small">Defina os tempos.</p>
+                             </a>
+                        </div>
+                        <div class="home-card-wrapper">
+                             <a class="card home-card" data-goto="materias">
+                                <h3>📚 Matérias</h3>
+                                <p class="home-card-description-small">Disciplinas escolares.</p>
+                             </a>
+                        </div>
+                        <div class="home-card-wrapper">
+                            <a class="card home-card" data-goto="professores">
+                                <h3>👨‍🏫 Professores</h3>
+                                <p class="home-card-description-small">Cadastre docentes.</p>
+                             </a>
+                        </div>
+                        <div class="home-card-wrapper">
+                            <a class="card home-card" data-goto="turmas">
+                                <h3>🎓 Turmas</h3>
+                                <p class="home-card-description-small">Defina as classes.</p>
+                             </a>
+                        </div>
+                     </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="page-estruturas" class="page">
+            <div class="card painel-gerenciamento painel-crud">
+                <div class="painel-header">
+                    <div class="painel-tabs">
+                        <button class="painel-tab-btn active" data-tab="gerenciar">🗂️ Gerenciar</button>
+                        <button class="painel-tab-btn" data-tab="formulario">📝 Nova Estrutura</button>
+                        <button class="painel-tab-btn" data-tab="arquivados">🗃️ Arquivados</button>
+                    </div>
+                    <div class="painel-actions">
+                        <button class="primary btn-add-new" data-action="add-new">➕ Adicionar Nova</button>
+                    </div>
+                </div>
+                <div class="painel-content">
+                    <div class="painel-tab-content active" data-tab-content="gerenciar">
+                        <div id="lista-estruturas-container"></div>
+                    </div>
+                    <div class="painel-tab-content" data-tab-content="formulario">
+                        <div id="form-estrutura-container"></div>
+                    </div>
+                    <div class="painel-tab-content" data-tab-content="arquivados">
+                        <div class="form-row"><input type="search" id="filtroEstruturasArquivadas" placeholder="🔎 Buscar estrutura arquivada..." style="width: 100%;" autocomplete="off" /></div>
+                        <div id="lista-estruturas-arquivadas-container"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="page-materias" class="page">
+            <div class="card painel-gerenciamento painel-crud">
+                <div class="painel-header">
+                    <div class="painel-tabs">
+                        <button class="painel-tab-btn active" data-tab="gerenciar">🗂️ Gerenciar</button>
+                        <button class="painel-tab-btn" data-tab="formulario">📝 Nova Matéria</button>
+                        <button class="painel-tab-btn" data-tab="arquivados">🗃️ Arquivadas</button>
+                    </div>
+                    <div class="painel-actions">
+                        <button class="primary btn-add-new" data-action="add-new">➕ Adicionar Nova</button>
+                    </div>
+                </div>
+                <div class="painel-content">
+                    <div class="painel-tab-content active" data-tab-content="gerenciar">
+                        <div class="form-row"><input type="search" id="filtroMaterias" placeholder="🔎 Buscar matéria..." style="width: 100%;" autocomplete="off" /></div>
+                        <table class="table" id="tblMaterias">
+                            <thead>
+                                <tr>
+                                    <th>Cor</th>
+                                    <th>Nome</th>
+                                    <th>Sigla</th>
+                                    <th>Ações</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                    <div class="painel-tab-content" data-tab-content="formulario">
+                        <div id="form-materia-container"></div>
+                    </div>
+                    <div class="painel-tab-content" data-tab-content="arquivados">
+                        <div class="form-row"><input type="search" id="filtroMateriasArquivadas" placeholder="🔎 Buscar matéria arquivada..." style="width: 100%;" autocomplete="off" /></div>
+                        <table class="table" id="tblMateriasArquivadas">
+                            <thead>
+                                <tr>
+                                    <th>Nome</th>
+                                    <th>Sigla</th>
+                                    <th>Ações</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="page-professores" class="page">
+             <div class="card painel-gerenciamento painel-crud">
+                <div class="painel-header">
+                    <div class="painel-tabs">
+                        <button class="painel-tab-btn active" data-tab="gerenciar">🗂️ Gerenciar</button>
+                        <button class="painel-tab-btn" data-tab="formulario">📝 Novo Professor</button>
+                        <button class="painel-tab-btn" data-tab="arquivados">🗃️ Arquivados</button>
+                    </div>
+                    <div class="painel-actions">
+                        <button class="primary btn-add-new" data-action="add-new">➕ Adicionar Novo</button>
+                    </div>
+                </div>
+                <div class="painel-content">
+                    <div class="painel-tab-content active" data-tab-content="gerenciar">
+                        <div class="form-row">
+                            <input type="search" id="filtroProfessores" placeholder="🔎 Buscar professor..." style="width: 100%;" autocomplete="off" />
+                            </div>
+                        <table class="table" id="tblProfessores">
+                            <thead>
+                                <tr>
+                                    <th>Nome</th>
+                                    <th>Matérias</th>
+                                    <th>Disponibilidade</th>
+                                    <th>Ações</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                    <div class="painel-tab-content" data-tab-content="formulario">
+                        <div id="form-professor-container"></div>
+                    </div>
+                     <div class="painel-tab-content" data-tab-content="arquivados">
+                        <div class="form-row">
+                            <input type="search" id="filtroProfessoresArquivados" placeholder="🔎 Buscar professor arquivado..." style="width: 100%;" autocomplete="off" />
+                        </div>
+                        <table class="table" id="tblProfessoresArquivados">
+                           <thead>
+                                <tr>
+                                    <th>Nome</th>
+                                    <th>Ações</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="page-turmas" class="page">
+            <div class="card painel-gerenciamento painel-crud">
+                <div class="painel-header">
+                    <div class="painel-tabs">
+                        <button class="painel-tab-btn active" data-tab="gerenciar">🗂️ Gerenciar</button>
+                        <button class="painel-tab-btn" data-tab="formulario">📝 Nova Turma</button>
+                    </div>
+                    <div class="painel-actions">
+                        <button class="primary btn-add-new" data-action="add-new">➕ Adicionar Nova</button>
+                    </div>
+                </div>
+                <div class="painel-content">
+                    <div class="painel-tab-content active" data-tab-content="gerenciar">
+                         <div class="form-row"><input type="search" id="filtroTurmas" placeholder="🔎 Buscar turma..." style="width: 100%;" autocomplete="off" /></div>
+                        <table class="table" id="tblTurmas">
+                            <thead>
+                                <tr>
+                                    <th>Nome</th>
+                                    <th>Estrutura Padrão</th>
+                                    <th>Ações</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                    <div class="painel-tab-content" data-tab-content="formulario">
+                        <div id="form-turma-container"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="page-gerar-horario" class="page">
+            <div id="gerador-wizard-container" class="card painel-gerenciamento">
+                 <div class="painel-header" id="gerador-wizard-header">
+                    <div class="painel-tabs" id="gerador-wizard-tabs">
+                        <button class="painel-tab-btn" data-step="1" disabled>1. Escopo</button>
+                        <button class="painel-tab-btn" data-step="2" disabled>2. Matriz Curricular</button>
+                        <button class="painel-tab-btn" data-step="3" disabled>3. Confirmar</button>
+                    </div>
+                    <div class="painel-actions">
+                        <button id="btn-gerador-next" class="primary" disabled>Próximo Passo &gt;</button>
+                    </div>
+                </div>
+                <div class="painel-content" id="gerador-wizard-content">
+                    <div class="painel-tab-content" data-tab-content="1">
+                        <div id="gerador-step1-container"></div>
+                    </div>
+                    <div class="painel-tab-content" data-tab-content="2">
+                        <div id="gerador-step2-container"></div>
+                    </div>
+                    <div class="painel-tab-content" data-tab-content="3">
+                        <div id="gerador-step3-container"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="gerador-escalaView" class="hidden">
+                <div class="card">
+                    <div class="escala-view-header">
+                        <div class="header-actions-group">
+                            <button id="btnExcluirEscalaGerador" class="danger">🔥 Descartar</button>
+                        </div>
+                        <div class="escala-view-header-center">
+                            <div id="gerador-escala-title-container" class="escala-title-container">
+                                <h2 class="escala-title-text" id="gerador-escalaViewTitle"></h2>
+                                <input type="text" class="escala-title-input" id="gerador-escalaViewTitleInput" autocomplete="off" />
+                                <button class="escala-title-edit-btn" id="gerador-escala-edit-title-btn" title="Editar nome" aria-label="Editar nome">✏️</button>
+                            </div>
+                        </div>
+                        <div class="header-actions-group">
+                            <button id="btnSalvarEscalaGerador" class="success">💾 Salvar Grade</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card card-table-container">
+                    <div id="gerador-escalaTabelaWrap"></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="page-horarios-salvos" class="page">
+            <div id="listaEscalasContainer" class="card card-lista">
+                 <h2>Grades Salvas</h2>
+                 <div id="listaEscalas" style="margin-top: 24px;"></div>
+            </div>
+
+            <div id="escalaSalvaView" class="hidden">
+                 <div class="card">
+                    <div class="escala-view-header">
+                        <div class="header-actions-group">
+                            <button id="btnVoltarParaLista" class="secondary button-voltar" style="margin: 0;">&lt; Voltar</button>
+                        </div>
+                        <div class="escala-view-header-center">
+                            <h2 id="escalaSalvaViewTitle" style="margin: 0; font-size: 1.5rem;"></h2>
+                            </div>
+                        <div class="header-actions-group">
+                            <button id="btnEditarEscalaSalva" class="secondary">✏️ Editar</button>
+                            <button id="btnExcluirEscalaSalva" class="danger">🔥 Excluir</button>
+                            <button id="btnExportarPDF" class="primary">🖨️ Baixar</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div id="escalaSalvaTabelaWrap"></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="page-configuracoes" class="page">
+            <div class="card painel-gerenciamento config-painel">
+                <div class="painel-header">
+                    <div class="painel-tabs" id="config-tabs">
+                        <button class="painel-tab-btn active" data-tab="geral"><span>⚙️</span> Geral</button>
+                        <button class="painel-tab-btn" data-tab="dados"><span>💾</span> Dados</button>
+                        <button class="painel-tab-btn" data-tab="sobre"><span>ℹ️</span> Sobre</button>
+
+                    </div>
+                </div>
+                <div class="painel-content" id="config-content">
+                    <div class="config-pane active" data-pane="geral">
+                        <div class="card">
+                            <h2 class="config-card-title">Preferências Gerais</h2>
+                            <div class="config-item-group">
+                                <div class="config-item">
+                                    <div class="config-item-label">
+                                        <h3>Nome de Usuário</h3>
+                                        <p>Usado para personalizar a saudação na tela inicial.</p>
+                                    </div>
+                                    <div class="config-item-control">
+                                        <div class="animated-field" style="width: 100%; max-width: 300px;">
+                                            <input type="text" id="configNome" placeholder=" " autocomplete="off" />
+                                            <label for="configNome">Seu nome</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="config-card-footer">
+                                <button id="btnSalvarConfig" class="success">💾 Salvar Preferências</button>
+                            </div>
+                        </div>
+                        <div class="card" style="text-align: center;">
+                            <p style="margin: 0; font-weight: bold;">Aula Pro v1.0.0</p>
+                            <p style="font-size: 0.9rem; color: var(--muted); margin: 4px 0 0 0;">desenvolvido por Escala Fácil</p>
+                            <p style="font-size: 0.9rem; color: var(--muted); margin: 4px 0 0 0;">Uma ferramenta para simplificar a criação de grades escolares.</p>
+                            <p style="font-size: 0.8rem; color: var(--muted); margin-top: 16px; border-top: 1px solid var(--border); padding-top: 16px;">
+                                © <span id="copyright-year">2025</span> Escala Fácil — Todos os direitos reservados.<br>
+                                Uso sujeito aos Termos de Licença e Política de Privacidade.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="config-pane" data-pane="dados">
+                         <div class="card">
+                            <h2 class="config-card-title">Backup e Restauração</h2>
+                            <p class="config-card-subtitle">
+                                Seus dados são salvos apenas neste programa. Use as opções abaixo para criar um arquivo de segurança (backup) e restaurá-lo em outro computador ou instalação do programa.
+                            </p>
+                            <div class="config-item-group">
+                                <div class="config-item">
+                                    <div class="config-item-label">
+                                        <h3>Criar um Backup Manual</h3>
+                                        <p>Isso irá exportar todos os seus dados (estruturas, matérias, professores, etc.) para um único arquivo <code>.json</code>.</p>
+                                    </div>
+                                    <div class="config-item-control">
+                                        <button id="btn-export-data" class="primary">📤 Exportar Todos os Dados</button>
+                                    </div>
+                                </div>
+                                <div class="config-item">
+                                    <div class="config-item-label">
+                                        <h3>Restaurar de um Backup</h3>
+                                        <p class="warning-text"><strong>Atenção:</strong> A importação de um arquivo substituirá permanentemente todos os dados existentes no aplicativo.</p>
+                                    </div>
+                                    <div class="config-item-control">
+                                        <button id="btn-import-data" class="secondary">📥 Importar de um Arquivo</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card card--danger-zone">
+                            <h2 class="config-card-title">🔥 Apagar Todos os Dados</h2>
+                             <div class="config-item-group">
+                                 <div class="config-item">
+                                    <div class="config-item-label">
+                                        <p class="warning-text"><strong>Ação irreversível.</strong> Remove permanentemente todos os cadastros e grades salvas deste programa.</p>
+                                    </div>
+                                    <div class="config-item-control">
+                                        <button id="btnHardReset" class="danger">🔥 Apagar Todos os Dados</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="config-pane" data-pane="sobre">
+                        <div class="card card-animated-border card-animated-border--cat-colors">
+                            <div class="support-card-content">
+                                <div class="support-card-col-left">
+                                    <h2 class="animated-brand-text animated-brand-text--cat-colors" style="font-size: 1.5rem; margin-bottom: 16px;">🐈 Gostou do app?</h2>
+                                    <p class="muted" style="text-align: left;">
+                                        Este é um projeto independente, feito com muito carinho e sob a supervisão de três assistentes felinos exigentes 😼.<br> Se o app te ajudou, que tal pagar um sachê pra eles? Eles vão ficar muito felizes!
+                                    </p>
+                                    <div class="pix-key-container" style="margin-top: 16px;">
+                                        <span id="pix-key-text">escalafacil.contato@gmail.com</span>
+                                        <button id="btn-copy-pix" title="Copiar Chave">📋</button>
+                                    </div>
+                                </div>
+                                <div class="support-card-col-right">
+                                     <div id="pix-details">
+                                        <img src="img/pix.png" alt="QR Code PIX para doação" class="pix-qr-code-image">
+                                        </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card">
+                             <h2 class="config-card-title">Ajuda e Recursos</h2>
+                             <div class="config-links-container">
+                                 <button class="info-link-btn" id="config-terms-card"><span>🔒</span> Termos de Uso</button>
+                                 <button class="info-link-btn" id="config-privacy-card"><span>🛡️</span> Política de Privacidade</button>
+                                 <button class="info-link-btn" id="config-shortcuts-card"><span>⌨️</span> Atalhos de Teclado</button>
+                                 <a href="mailto:escalafacil.contato@gmail.com" class="info-link-btn"><span>🐛</span> Reportar um Problema</a>
+                             </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <aside id="editor-toolbox" class="hidden"></aside>
+        <button id="editor-toolbox-fab" class="hidden" title="Abrir Barra de Ferramentas">
+            <span>🎨</span>
+        </button>
+
+    </main>
+
+    <div id="modalBackdrop" class="modal-backdrop hidden">
+        <div id="modal" class="modal">
+            <h3 id="modalTitle"></h3>
+            <div id="modalMessage" style="text-align: left; max-height: 400px; overflow-y: auto; padding-right: 16px;">
+            </div>
+            <div class="modal-actions" style="margin-top: 24px;">
+                <button id="modalCancel" class="secondary">Cancelar</button>
+                <button id="modalConfirm" class="primary">✓ Confirmar</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="exportModalBackdrop" class="modal-backdrop hidden">
+        <div id="exportModal" class="modal">
+            <h3>Exportar Grade</h3>
+            <p>Escolha o formato de exportação.</p>
+            <div class="modal-actions" style="flex-direction: column; gap: 12px; margin-top: 16px;">
+                <button id="btnExportVisaoGeral" class="primary">Grade Completa (PDF)</button>
+                <button id="btnExportCancelar" class="secondary" style="margin-top: 8px;">Cancelar</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="toast" class="toast hidden">
+        <p id="toastMessage"></p>
+    </div>
+
+    <div id="loader-overlay" class="hidden">
+        <div class="grid-loader">
+            <div class="grid-cell"></div>
+            <div class="grid-cell"></div>
+            <div class="grid-cell"></div>
+            <div class="grid-cell"></div>
+            <div class="grid-cell"></div>
+            <div class="grid-cell"></div>
+            <div class="grid-cell"></div>
+            <div class="grid-cell"></div>
+            <div class="grid-cell"></div>
+        </div>
+        <p class="loader-text">Processando...</p>
+        <button id="loader-cancel-btn" class="danger">Cancelar</button>
+    </div>
+
+
+    <div id="download-feedback-toast" class="hidden">
+        <div class="feedback-toast-icon-sequence">
+            <div class="icon-set success-icons">
+                <span class="icon icon-step-1">📥</span>
+                <span class="icon icon-step-2">📁</span>
+                <span class="icon icon-step-3">✨</span>
+                <span class="icon icon-step-4">✅</span>
+            </div>
+            <div class="icon-set error-icons">
+                <span class="icon icon-step-1">📥</span>
+                <span class="icon icon-step-2">🚫</span>
+                <span class="icon icon-step-3">❌</span>
+                <span class="icon icon-step-4">⚠️</span>
+            </div>
+        </div>
+        <div class="feedback-toast-text">
+            <h3 class="feedback-toast-title"></h3>
+            <p class="feedback-toast-subtitle"></p>
+        </div>
+    </div>
+
+    <div id="help-panel-backdrop"></div>
+    <aside id="help-panel">
+        <div id="help-panel-header">
+            <h3 id="help-panel-title">Ajuda</h3>
+            <button id="help-panel-close-btn">❌</button>
+        </div>
+        <div id="help-panel-content">
+            </div>
+    </aside>
+
+
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.1/jspdf.plugin.autotable.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script src="js/D-utilitarios-compartilhados.js"></script>
+    <script src="js/E-constantes.js"></script>
+    <script src="js/C-utilitarios.js"></script>
+    <script src="js/B-armazenamento-dados.js"></script>
+    
+    <script src="js/G-modulo-estruturas.js"></script>
+    <script src="js/H-modulo-materias.js"></script>
+    <script src="js/I-modulo-professores.js"></script>
+    <script src="js/J-modulo-turmas.js"></script>
+    
+    <script src="js/K-assistente-geracao.js"></script>
+    <script src="js/P-editor-manual.js"></script>
+    <script src="js/N-visualizador-escala.js"></script>
+    <script src="js/L-controlador-geracao.js"></script>
+    
+    <script src="js/O-modulo-escalas-salvas.js"></script>
+    <script src="js/R-modulo-configuracoes.js"></script>
+    <script src="js/F-boas-vindas.js"></script>
+    <script src="js/S-exportador-pdf.js"></script>
+    <script src="js/T-ajuda-contextual.js"></script>
+    <script src="js/Z-ativacao.js"></script>
+    <script src="js/A-principal.js"></script>
+</body>
+
+</html>
